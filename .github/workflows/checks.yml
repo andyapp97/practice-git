@@ -1,0 +1,14 @@
+   name: checks
+   on:
+     pull_request:
+   jobs:
+     no-todos:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v4
+         - name: Fail if README contains TODO
+           run: |
+             if grep -n "TODO" README.md; then
+               echo "README contains a TODO. Open an issue instead."
+               exit 1
+             fi
